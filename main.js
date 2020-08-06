@@ -41,7 +41,7 @@ function toggleRuffle() {
     location.reload();
 }
 document.getElementById("swf").src = localStorage.getItem("game");
-list.addEventListener("change", getURL);
+list.addEventListener("change" , getURL);
 ruffleToggleButton.addEventListener("click", toggleRuffle);
 getFileListing("https://api.github.com/repos/tsukisuperior/flash-games/contents");            //get the listing
 
