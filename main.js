@@ -2,7 +2,7 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",      
     message = document.getElementById("message"),                                           //The message element at the top of the page
     files = [],                                                                             //the list of file names
     list = document.getElementById("list"),                                                 //file listing dropdown box
-    exceptedFiles = /\.git*/,                                                            //Regular Expression to find .gitingore and the such
+    exceptedFiles = /\.git*/;                                                       //Regular Expression to find .gitingore and the such
 
 function getFileListing(target) {                                                           //gets file listing from github repo
     var xhttp = new XMLHttpRequest();
