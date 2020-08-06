@@ -33,7 +33,11 @@ function refreshGames() {                                                       
 }
 
 function getURL() {
-    //document.removeChild(document.getElementById("swf"));
+    try {
+        document.removeChild(document.getElementById("swf"));
+    } catch (e) {
+
+    }
     let ruffle = window.RufflePlayer.newest();
     let player = ruffle.create_player();
     document.body.appendChild(player);
