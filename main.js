@@ -1,8 +1,10 @@
-var baseURL = "https://github.com/tsukisuperior/flash-games/blob/master/public/",           //The base url for the repo
+var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",           //The base url for the repo
     message = document.getElementById("message"),                                           //The message element at the top of the page
     files = [],                                                                             //the list of file names
     list = document.getElementById("list"),                                                 //file listing dropdown box
-    exceptedFiles = /\.git*/;                                                               //Regular Expression to find .gitingore and the such
+    exceptedFiles = /\.git*/,                                                            //Regular Expression to find .gitingore and the such
+    flashGame = document.getElementById("swf");
+
 
 function getFileListing(target) {                                                           //gets file listing from github repo
     var xhttp = new XMLHttpRequest();
@@ -31,6 +33,13 @@ function refreshGames() {                                                       
     }
 
 }
+
+function getURL() {
+    flashGame.src = baseURL + list.value;
+}
+
+list.addEventListener("change", getURL);
+
 
 getFileListing("https://api.github.com/repos/tsukisuperior/flash-games/contents");            //get the listing
 
