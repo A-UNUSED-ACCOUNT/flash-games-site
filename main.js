@@ -33,7 +33,11 @@ function refreshGames() {                                                       
 }
 
 function getURL() {
-    document.getElementById("swf").src = baseURL + list.value;
+    document.removeChild(document.getElementById("swf"));
+    let ruffle = window.RufflePlayer.newest();
+    let player = ruffle.create_player();
+    document.body.appendChild(player);
+    player.stream_swf_url(baseURL + list.value);
 }
 
 list.addEventListener("change", getURL);
