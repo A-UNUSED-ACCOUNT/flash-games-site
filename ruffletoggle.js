@@ -1,1 +1,5 @@
-document.body.innerHTML += (localStorage.getItem("useRuffle")=="true") ? "<script src=\"./ruffle/ruffle.js\"></script>" : "";
+if (localStorage.getItem("useRuffle") == "true"){
+    var element= document.createElement("script");
+    element.src="./ruffle/ruffle.js";
+    document.body.appendChild(element);
+}
