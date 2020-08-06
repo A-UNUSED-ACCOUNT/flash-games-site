@@ -34,7 +34,7 @@ function refreshGames() {                                                       
 
 function getURL() {
     try {
-        document.removeChild(document.getElementsByTagName("ruffle-player"));
+        document.body.removeChild(document.getElementsByTagName("ruffle-player"));
     } catch (e) {
 
     }
