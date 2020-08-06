@@ -34,7 +34,7 @@ function refreshGames() {                                                       
 
 function getURL() {
     localStorage.setItem("game", baseURL + list.value)
-
+    location.reload();
 }
 
 list.addEventListener("change", getURL);
