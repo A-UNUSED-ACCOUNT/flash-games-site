@@ -1,7 +1,7 @@
 var element = document.createElement("embed");
 element.src = localStorage.getItem("game");
-element.width = "640px";
-element.width = "480px";
+element.width = "1280px";
+element.width = "1024px";
 document.body.appendChild(element);
 
 if (localStorage.getItem("useRuffle") == "true") {
