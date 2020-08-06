@@ -40,8 +40,8 @@ function toggleRuffle() {
     localStorage.setItem("useRuffle", localStorage.getItem("useRuffle") != "true");
     location.reload();
 }
-document.getElementById("swf").data = localStorage.getItem("game");
-list.addEventListener("change" , getURL);
+document.getElementById("swf").src= localStorage.getItem("game");
+list.addEventListener("change", getURL);
 ruffleToggleButton.addEventListener("click", toggleRuffle);
 getFileListing("https://api.github.com/repos/tsukisuperior/flash-games/contents");            //get the listing
 
