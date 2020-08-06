@@ -3,8 +3,6 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",      
     files = [],                                                                             //the list of file names
     list = document.getElementById("list"),                                                 //file listing dropdown box
     exceptedFiles = /\.git*/,                                                            //Regular Expression to find .gitingore and the such
-    flashGame = document.getElementById("swf");
-
 
 function getFileListing(target) {                                                           //gets file listing from github repo
     var xhttp = new XMLHttpRequest();
@@ -35,7 +33,7 @@ function refreshGames() {                                                       
 }
 
 function getURL() {
-    flashGame.src = baseURL + list.value;
+    document.getElementById("swf").src = baseURL + list.value;
 }
 
 list.addEventListener("change", getURL);
