@@ -39,10 +39,5 @@ function getURL() {
 
 list.addEventListener("change", getURL);
 
-
 getFileListing("https://api.github.com/repos/tsukisuperior/flash-games/contents");            //get the listing
 
-let ruffle = window.RufflePlayer.newest();
-let player = ruffle.create_player();
-document.body.appendChild(player);
-player.stream_swf_url(localStorage.getItem("game") || "");

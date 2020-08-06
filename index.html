@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <script src="ruffletoggle.js"></script>
     <style>
         body {
             background-image: url('flash.jpg');
@@ -21,14 +22,17 @@
             height: 100%;
         }
     </style>
-    <script src="./ruffle//ruffle.js"></script>
+
 </head>
 
 <body>
     <div id="message">
         Welcome to PLACEHOLDER
     </div>
-    <select id="list"></select>
+    <select id="list">
+        <option>None</option>
+    </select>
+    <button id="ruffleToggle">Toggle Ruffle</button>
     <script src="./main.js"></script>
 </body>
 
