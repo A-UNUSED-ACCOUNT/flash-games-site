@@ -1,5 +1,5 @@
 var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",           //The base url for the repo
-    message = document.getElementById("message"),                                           //The message element at the top of the page
+    ruffleToggleButton = document.getElementById("ruffleToggle"),                                           //The message element at the top of the page
     files = [],                                                                             //the list of file names
     list = document.getElementById("list"),                                                 //file listing dropdown box
     exceptedFiles = /\.git*/;                                                       //Regular Expression to find .gitingore and the such
@@ -36,8 +36,11 @@ function getURL() {
     localStorage.setItem("game", baseURL + list.value)
     location.reload();
 }
+function toggleRuffle() {
+    localStorage.setItem("useRuffle", localStorage.getItem("useRuffle") != "true");
+}
 
 list.addEventListener("change", getURL);
-
+ruffleToggleButton.addEventListener("click")
 getFileListing("https://api.github.com/repos/tsukisuperior/flash-games/contents");            //get the listing
 
