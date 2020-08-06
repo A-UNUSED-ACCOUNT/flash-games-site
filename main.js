@@ -39,7 +39,6 @@ function getURL() {
 function toggleRuffle() {
     localStorage.setItem("useRuffle", localStorage.getItem("useRuffle") != "true");
     location.reload();
-
 }
 
 list.addEventListener("change", getURL);

@@ -1,6 +1,5 @@
-if (localStorage.getItem("useRuffle") == "true") {
-    document.head.innerHTML += "<script src=\"./ruffle/ruffle.js\"></script>";
-}
-var element = document.createElement("embed");
-element.src = localStorage.getItem("game");
-document.body.appendChild(element);
+window.RufflePlayer = window.RufflePlayer || {};
+window.RufflePlayer.config = {
+    "public_path": "./ruffle/",
+    "polyfills": ((localStorage.getItem("useRuffle")) ? ["static-content", "plugin-detect", "dynamic-content", "frames"] : [])
+};
