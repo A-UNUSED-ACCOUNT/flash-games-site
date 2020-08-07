@@ -51,6 +51,8 @@ function getInfofile() {
         if (this.readyState == 4 && this.status == 200) {
             swfInfo = JSON.parse(this.responseText);
             startSwf();
+        } else {
+            console.log("Could not get info.json");
         }
     };
     xhttp.open("GET", "./info.json", true);
@@ -69,8 +71,8 @@ function startSwf() {
     element.src = localStorage.getItem("game");
     element.width = dimensions[0] + "px";
     element.height = dimensions[1] + "px";
-    console.log("Width "+dimensions[0]);
-    console.log("Height  "+dimensions[1]);
+    console.log("Width " + dimensions[0]);
+    console.log("Height  " + dimensions[1]);
     document.body.appendChild(element);
     if (localStorage.getItem("useRuffle") == "true") {
         element = document.createElement("script");
