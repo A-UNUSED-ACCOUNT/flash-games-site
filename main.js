@@ -69,7 +69,7 @@ function startSwf() {
         dimensions = [1280, 1024];
     }
     var element = document.createElement("embed");
-    element.src = baseUrl + localStorage.getItem("game");
+    element.src = baseURL + localStorage.getItem("game");
     element.width = dimensions[0] + "px";
     element.height = dimensions[1] + "px";
     console.log("Width " + dimensions[0]);
