@@ -56,9 +56,10 @@ function getInfofile() {
     xhttp.open("GET", "./info.json", true);
     xhttp.send();
 }
+
 function startSwf() {
     var dimensions;
-    if (typeof swfInfo[name] != "undefined" && typeof swfInfo[name]["Dimensions"] == "string" && (swfInfo[name]["Dimensions"].toLowerCase() != "unknown" || swfInfo[name]["Dimensions"].toLowerCase() != "")) {
+    if (typeof swfInfo[name] != "undefined" && typeof swfInfo[name]["Dimensions"] == "string" && swfInfo[name]["Dimensions"].toLowerCase() != "unknown" && swfInfo[name]["Dimensions"].toLowerCase() != "") {
         dimensions = swfInfo[name]["Dimensions"].toLowerCase().split("x");
 
     } else {
