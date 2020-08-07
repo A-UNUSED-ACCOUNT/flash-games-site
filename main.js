@@ -36,7 +36,7 @@ function refreshGames() {                                                       
 }
 
 function getURL() {                                                                            //save the url of the selected swf and reload
-    localStorage.setItem("game", baseURL + list.value)
+    localStorage.setItem("game", list.value)
     location.reload();
 }
 
@@ -60,7 +60,8 @@ function getInfofile() {
 }
 
 function startSwf() {
-    var dimensions;
+    var dimensions,
+        name = localStorage.getItem("game");
     if (typeof swfInfo[name] != "undefined" && typeof swfInfo[name]["Dimensions"] == "string" && swfInfo[name]["Dimensions"].toLowerCase() != "unknown" && swfInfo[name]["Dimensions"].toLowerCase() != "") {
         console.log(swfInfo[name]);
         dimensions = swfInfo[name]["Dimensions"].toLowerCase().split("x");
@@ -68,7 +69,7 @@ function startSwf() {
         dimensions = [1280, 1024];
     }
     var element = document.createElement("embed");
-    element.src = localStorage.getItem("game");
+    element.src = baseUrl + localStorage.getItem("game");
     element.width = dimensions[0] + "px";
     element.height = dimensions[1] + "px";
     console.log("Width " + dimensions[0]);
