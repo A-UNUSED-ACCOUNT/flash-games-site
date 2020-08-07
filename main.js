@@ -1,13 +1,20 @@
-
-var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",           //The base url for the repo
-    ruffleToggleButton = document.getElementById("ruffleToggle"),                    //The message element at the top of the page
-    files = [],                                                                      //the list of file names
-    list = document.getElementById("list"),                                          //file listing dropdown box
-    exceptedFiles = /\.git*/,                                                         //Regular Expression to find .gitingore and the such
+/*The base url for the repo*/
+var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
+    /*The Ruffle toggle button*/
+    ruffleToggleButton = document.getElementById("ruffleToggle"),
+    /*A array of the flash object filenames*/
+    files = [],
+    /*the drop down box of filenames*/
+    list = document.getElementById("list"),
+    /*A regexp to filter out .git files*/
+    exceptedFiles = /\.git*/,
+    /*A object containing all the swf files info, generated from info.json*/
     swfInfo = {};
 
-
-function getFileListing(target) {                                                    //gets file listing from github repo
+/*
+requests the list of files from the server and puts it in files
+*/
+function getFileListing(target) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -22,10 +29,13 @@ function getFileListing(target) {                                               
     xhttp.send();
 }
 
-function refreshGames() {                                                                    //Fills in the dropdown box of games
+/*
+generates drop down box
+*/
+function refreshGames() {
     var element;
     for (var x = 0; x < files.length; x++) {
-        if (exceptedFiles.test(files[x])) {                                                  //ignores the .git* files
+        if (exceptedFiles.test(files[x])) {
             continue;
         }
         element = document.createElement("option");
@@ -35,28 +45,40 @@ function refreshGames() {                                                       
 
 }
 
-function getURL() {                                                                            //save the url of the selected swf and reload
+/*
+saves game name in localstorage, and reloads the page
+*/
+function saveGameName() {
     localStorage.setItem("game", list.value)
     location.reload();
 }
 
-function toggleRuffle() {                                                                       // save the state of ruffles activation and reload
+/*toggles ruffle, and reloads*/
+function toggleRuffle() {
     localStorage.setItem("useRuffle", localStorage.getItem("useRuffle") != "true");
     location.reload();
 }
 
+/*
+gets info.json, a file that contains a lot of info on the swf files
+*/
 function getInfofile() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             swfInfo = JSON.parse(this.responseText);
             startSwf();
-        } 
+        }
     };
     xhttp.open("GET", "https://test.spontaneousegg.com/info.json", true);
     xhttp.send();
 }
 
+/*
+generates the embed element for the swf file in localstorage
+the resolution of the swf is kept in info.json
+if a valid entry for a swf file is not found, the default resolution is 1280x1024
+*/
 function startSwf() {
     var dimensions,
         name = localStorage.getItem("game");
@@ -80,7 +102,10 @@ function startSwf() {
     }
 }
 
-list.addEventListener("change", getURL);
+/*
+initializing functions
+*/
+list.addEventListener("change", saveGameName);
 ruffleToggleButton.addEventListener("click", toggleRuffle);
 getFileListing("https://api.github.com/repos/tsukisuperior/flash-games/contents");            //get the listing
 getInfofile();
