@@ -61,7 +61,6 @@ function startSwf() {
     var dimensions;
     if (typeof swfInfo[name] != "undefined" && typeof swfInfo[name]["Dimensions"] == "string" && swfInfo[name]["Dimensions"].toLowerCase() != "unknown" && swfInfo[name]["Dimensions"].toLowerCase() != "") {
         dimensions = swfInfo[name]["Dimensions"].toLowerCase().split("x");
-
     } else {
         dimensions = [1280, 1024];
     }
@@ -69,6 +68,8 @@ function startSwf() {
     element.src = localStorage.getItem("game");
     element.width = dimensions[1] + "px";
     element.height = dimensions[2] + "px";
+    console.log("Width "+dimensions[1]);
+    console.log("Height  "+dimensions[2]);
     document.body.appendChild(element);
     if (localStorage.getItem("useRuffle") == "true") {
         element = document.createElement("script");
