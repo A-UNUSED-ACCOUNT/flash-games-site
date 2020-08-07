@@ -50,9 +50,10 @@ function getInfofile() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             swfInfo = JSON.parse(this.responseText);
+            startSwf();
         }
     };
-    xhttp.open("GET", target, true);
+    xhttp.open("GET", "./info.json", true);
     xhttp.send();
 }
 function startSwf() {
@@ -79,4 +80,3 @@ list.addEventListener("change", getURL);
 ruffleToggleButton.addEventListener("click", toggleRuffle);
 getFileListing("https://api.github.com/repos/tsukisuperior/flash-games/contents");            //get the listing
 getInfofile();
-startSwf();
