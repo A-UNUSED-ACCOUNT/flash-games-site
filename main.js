@@ -51,9 +51,7 @@ function getInfofile() {
         if (this.readyState == 4 && this.status == 200) {
             swfInfo = JSON.parse(this.responseText);
             startSwf();
-        } else {
-            console.log("Could not get info.json");
-        }
+        } 
     };
     xhttp.open("GET", "https://test.spontaneousegg.com/info.json", true);
     xhttp.send();
