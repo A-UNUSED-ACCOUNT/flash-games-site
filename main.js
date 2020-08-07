@@ -1,8 +1,6 @@
 var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
     /*The Ruffle toggle button*/
     ruffleToggleButton = document.getElementById("ruffleToggle"),
-    /*A array of the flash object filenames*/
-    files = [],
     /*the drop down box of filenames*/
     list = document.getElementById("list"),
     /*A regexp to filter out .git files*/
@@ -23,13 +21,12 @@ xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         var response = JSON.parse(this.responseText);
         for (var x = 0; x < response.length; x++) {
-            if (allowedFiles.test(files[x])) {
+            if (allowedFiles.test(response[x].name)) {
                 element = document.createElement("option");
                 list.appendChild(element);
-                element.innerHTML = files[x];
+                element.innerHTML = response[x].name;
             }
         }
-        refreshGames();
     }
 };
 xhttp.open("GET", "https://api.github.com/repos/tsukisuperior/flash-games/contents", true);
