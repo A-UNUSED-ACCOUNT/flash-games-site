@@ -14,7 +14,7 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
 
     dimensions = [1280, 1024],
 
-    name = localStorage.getItem("game")
+    name = localStorage.getItem("game");
 
 xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
