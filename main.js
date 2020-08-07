@@ -7,7 +7,7 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
     /*the drop down box of filenames*/
     list = document.getElementById("list"),
     /*A regexp to filter out .git files*/
-    exceptedFiles = /\.git*/,
+    allowedFiles = /\.swf/,
     /*A object containing all the swf files info, generated from info.json*/
     swfInfo = {};
 
@@ -35,7 +35,7 @@ generates drop down box
 function refreshGames() {
     var element;
     for (var x = 0; x < files.length; x++) {
-        if (exceptedFiles.test(files[x])) {
+        if (!allowedFiles.test(files[x])) {
             continue;
         }
         element = document.createElement("option");
@@ -92,8 +92,6 @@ function startSwf() {
     element.src = baseURL + localStorage.getItem("game");
     element.width = dimensions[0] + "px";
     element.height = dimensions[1] + "px";
-    console.log("Width " + dimensions[0]);
-    console.log("Height  " + dimensions[1]);
     document.body.appendChild(element);
     if (localStorage.getItem("useRuffle") == "true") {
         element = document.createElement("script");
