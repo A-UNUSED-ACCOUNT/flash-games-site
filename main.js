@@ -39,25 +39,25 @@ xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         swfInfo = JSON.parse(this.responseText);
-        startSwf();
+        if (typeof swfInfo[name] != "undefined" && typeof swfInfo[name]["Dimensions"] == "string" && swfInfo[name]["Dimensions"].toLowerCase() != "unknown" && swfInfo[name]["Dimensions"].toLowerCase() != "") {
+            dimensions = swfInfo[name]["Dimensions"].toLowerCase().split("x");
+        }
+        element = document.createElement("embed");
+        element.src = baseURL + localStorage.getItem("game");
+        element.width = dimensions[0] + "px";
+        element.height = dimensions[1] + "px";
+        document.body.appendChild(element);
+        if (localStorage.getItem("useRuffle") == "true") {
+            element = document.createElement("script");
+            element.src = "./ruffle/ruffle.js";
+            document.body.appendChild(element);
+        }
     }
 };
 xhttp.open("GET", "https://test.spontaneousegg.com/info.json", true);
 xhttp.send();
 
-if (typeof swfInfo[name] != "undefined" && typeof swfInfo[name]["Dimensions"] == "string" && swfInfo[name]["Dimensions"].toLowerCase() != "unknown" && swfInfo[name]["Dimensions"].toLowerCase() != "") {
-    dimensions = swfInfo[name]["Dimensions"].toLowerCase().split("x");
-}
-element = document.createElement("embed");
-element.src = baseURL + localStorage.getItem("game");
-element.width = dimensions[0] + "px";
-element.height = dimensions[1] + "px";
-document.body.appendChild(element);
-if (localStorage.getItem("useRuffle") == "true") {
-    element = document.createElement("script");
-    element.src = "./ruffle/ruffle.js";
-    document.body.appendChild(element);
-}
+
 
 list.addEventListener("change", function () {
     localStorage.setItem("game", list.value)
