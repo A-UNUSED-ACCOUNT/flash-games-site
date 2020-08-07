@@ -55,7 +55,7 @@ function getInfofile() {
             console.log("Could not get info.json");
         }
     };
-    xhttp.open("GET", "./info.json", true);
+    xhttp.open("GET", location.href + "/info.json", true);
     xhttp.send();
 }
 
