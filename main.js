@@ -1,10 +1,10 @@
 var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",           //The base url for the repo
-    ruffleToggleButton = document.getElementById("ruffleToggle"),                                           //The message element at the top of the page
-    files = [],                                                                             //the list of file names
-    list = document.getElementById("list"),                                                 //file listing dropdown box
-    exceptedFiles = /\.git*/;                                                       //Regular Expression to find .gitingore and the such
+    ruffleToggleButton = document.getElementById("ruffleToggle"),                    //The message element at the top of the page
+    files = [],                                                                      //the list of file names
+    list = document.getElementById("list"),                                          //file listing dropdown box
+    exceptedFiles = /\.git*/;                                                        //Regular Expression to find .gitingore and the such
 
-function getFileListing(target) {                                                           //gets file listing from github repo
+function getFileListing(target) {                                                    //gets file listing from github repo
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -32,11 +32,11 @@ function refreshGames() {                                                       
 
 }
 
-function getURL() {
+function getURL() {                                                                            //save the url of the selected swf and reload
     localStorage.setItem("game", baseURL + list.value)
     location.reload();
 }
-function toggleRuffle() {
+function toggleRuffle() {                                                                       // save the state of ruffles activation and reload
     localStorage.setItem("useRuffle", localStorage.getItem("useRuffle") != "true");
     location.reload();
 }
