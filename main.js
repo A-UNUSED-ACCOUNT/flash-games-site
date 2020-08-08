@@ -51,7 +51,7 @@ xhttp.onreadystatechange = function () {
         }
     }
 };
-xhttp.open("GET", "https://test.spontaneousegg.com/info.json", true);
+xhttp.open("GET", baseURL + "info.json", true);
 xhttp.send();
 
 
