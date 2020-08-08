@@ -14,7 +14,9 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
 
     dimensions = [1280, 1024],
 
-    name = localStorage.getItem("game");
+    name = localStorage.getItem("game").replace(/ /g, "-") + ".swf",
+
+    tmp;
 
 xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
@@ -24,7 +26,7 @@ xhttp.onreadystatechange = function () {
             if (allowedFiles.test(response[x].name)) {
                 element = document.createElement("option");
                 list.appendChild(element);
-                element.innerHTML = response[x].name;
+                element.innerHTML = ((response[x].name).replace(/-/g, " ")).replace(/\.swf/g, " ");
             }
         }
     }
@@ -40,10 +42,15 @@ xhttp.onreadystatechange = function () {
             dimensions = swfInfo[name]["Dimensions"].toLowerCase().split("x");
         }
         element = document.createElement("embed");
-        element.src = baseURL + localStorage.getItem("game");
+        element.src = (baseURL + name);
         element.width = dimensions[0] + "px";
         element.height = dimensions[1] + "px";
-        document.body.appendChild(element);
+        element.id = "game";
+        element.style.transform = "scale(" + ((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2 + ")";
+        element.style.top = (((((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2) * dimensions[1]) / 2) + "px";
+        element.style.position = "relative";
+
+        document.body.firstElementChild.firstElementChild.appendChild(element);
         if (localStorage.getItem("useRuffle") == "true") {
             element = document.createElement("script");
             element.src = "./ruffle/ruffle.js";
@@ -57,10 +64,14 @@ xhttp.send();
 
 
 list.addEventListener("change", function () {
-    localStorage.setItem("game", list.value)
+    localStorage.setItem("game", list.value);
     location.reload();
 });
 ruffleToggleButton.addEventListener("click", function () {
     localStorage.setItem("useRuffle", localStorage.getItem("useRuffle") != "true");
     location.reload();
+});
+window.addEventListener("resize", function () {
+    document.getElementById("game").style.transform = "scale(" + ((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2 + ")";
+    document.getElementById("game").style.top = (((((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2) * dimensions[1]) / 2) + "px";
 });
