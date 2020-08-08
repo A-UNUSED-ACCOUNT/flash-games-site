@@ -14,7 +14,7 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
 
     dimensions = [1280, 1024],
 
-    name = localStorage.getItem("game").replace(/ /g, "-") + ".swf",
+    name = ((localStorage.getItem("game").replace(/-/g, " ")).replace(/\.swf/g, " ")).replace(/ /g, "-") + ".swf",
 
     tmp;
 
@@ -75,3 +75,4 @@ window.addEventListener("resize", function () {
     document.getElementById("game").style.transform = "scale(" + ((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2 + ")";
     document.getElementById("game").style.top = (((((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2) * dimensions[1]) / 2) + "px";
 });
+
