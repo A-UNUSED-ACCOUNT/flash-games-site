@@ -11,7 +11,7 @@
             background-size: 100% 100%;
         }
 
-        div {
+        #message {
             background-color: coral;
             opacity: 0.5;
             text-align: center;
@@ -21,14 +21,18 @@
 </head>
 
 <body>
-    <div id="message">
-        Ruffle Build 2020-08-07_94771a4
-        <select id="list">
-            <option>None</option>
-        </select>
-        <button id="ruffleToggle">Toggle Ruffle</button>
-    </div>
-    <script src="./main.js"></script>
+    <center>
+        <div id="message">
+            Ruffle Build 2020-08-07_94771a4
+            <select id="list">
+                <option>None</option>
+            </select>
+            <button id="ruffleToggle">Toggle Ruffle</button>
+        </div>
+        <script src="./main.js"></script>
+        <div id="gameContainer">
+        </div>
+    </center>
 </body>
 
 </html>

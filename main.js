@@ -46,11 +46,11 @@ xhttp.onreadystatechange = function () {
         element.width = dimensions[0] + "px";
         element.height = dimensions[1] + "px";
         element.id = "game";
-        element.style.transform = "scale(" + ((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2 + ")";
+        element.style.transform = "scale(" + Math.min((window.innerWidth / dimensions[0]), (window.innerHeight / dimensions[1])) + ")";
         element.style.top = (((((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2) * dimensions[1]) / 2) + "px";
         element.style.position = "relative";
 
-        document.body.appendChild(element);
+        document.getElementById("gameContainer").appendChild(element);
         if (localStorage.getItem("useRuffle") == "true") {
             element = document.createElement("script");
             element.src = "./ruffle/ruffle.js";
@@ -72,7 +72,7 @@ ruffleToggleButton.addEventListener("click", function () {
     location.reload();
 });
 window.addEventListener("resize", function () {
-    document.getElementById("game").style.transform = "scale(" + ((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2 + ")";
+    document.getElementById("game").style.transform = "scale(" + Math.min((window.innerWidth / dimensions[0]), (window.innerHeight / dimensions[1])) + ")";
     document.getElementById("game").style.top = (((((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2) * dimensions[1]) / 2) + "px";
 });
 
