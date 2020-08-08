@@ -50,7 +50,7 @@ xhttp.onreadystatechange = function () {
         element.style.top = (((((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2) * dimensions[1]) / 2) + "px";
         element.style.position = "relative";
 
-        document.body.firstElementChild.firstElementChild.appendChild(element);
+        document.body.appendChild(element);
         if (localStorage.getItem("useRuffle") == "true") {
             element = document.createElement("script");
             element.src = "./ruffle/ruffle.js";
