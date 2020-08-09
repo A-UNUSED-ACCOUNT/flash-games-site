@@ -21,13 +21,10 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
 if (localStorage.getItem("token") != "flash") {
     localStorage.setItem("token", "flash");
     localStorage.setItem("game", "");
-    name = "";
+    alert("Choose a game from the dropdown box");
+
 } else {
     name = localStorage.getItem("game");
-}
-
-if (name.length = 0){
-    alert("Choose a game from the dropdown box");
 }
 
 xhttp = new XMLHttpRequest();
