@@ -25,6 +25,9 @@ if (localStorage.getItem("token") != "flash") {
     name = localStorage.getItem("game");
 }
 
+if (name.length = 0){
+    alert("Choose a game from the dropdown box");
+}
 
 xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
