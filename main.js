@@ -52,7 +52,7 @@ xhttp.onreadystatechange = function () {
             dimensions = swfInfo[name]["Dimensions"].toLowerCase().split("x");
         }
         element = document.createElement("embed");
-        element.src = (baseURL + name);
+        element.src = (baseURL + name.replace(/ /g, "-"));
         element.width = dimensions[0] + "px";
         element.height = dimensions[1] + "px";
         element.id = "game";
