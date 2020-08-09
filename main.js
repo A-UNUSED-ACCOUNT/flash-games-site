@@ -14,9 +14,17 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
 
     dimensions = [1280, 1024],
 
-    name = ((localStorage.getItem("game").replace(/-/g, " ")).replace(/\.swf/g, " ")).replace(/ /g, "-") + ".swf",
+    name,
 
     tmp;
+
+if (localStorage.getItem("token") != "flash"){
+    localStorage.setItem("token") = "flash";
+    localStorage.setItem("game") = "";
+}else{
+    name = localStorage.getItem("game");
+}
+
 
 xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
@@ -26,11 +34,12 @@ xhttp.onreadystatechange = function () {
             if (allowedFiles.test(response[x].name)) {
                 element = document.createElement("option");
                 list.appendChild(element);
-                element.innerHTML = ((response[x].name).replace(/-/g, " ")).replace(/\.swf/g, " ");
+                element.innerHTML = (response[x].name).replace(/-|\.swf/g, " ");
             }
         }
     }
 };
+
 xhttp.open("GET", "https://api.github.com/repos/tsukisuperior/flash-games/contents", true);
 xhttp.send();
 
@@ -61,10 +70,8 @@ xhttp.onreadystatechange = function () {
 xhttp.open("GET", baseURL + "info.json", true);
 xhttp.send();
 
-
-
 list.addEventListener("change", function () {
-    localStorage.setItem("game", list.value);
+    localStorage.setItem("game", list.value.replace("/ /g", "-") + ".swf");
     location.reload();
 });
 ruffleToggleButton.addEventListener("click", function () {
@@ -75,4 +82,3 @@ window.addEventListener("resize", function () {
     document.getElementById("game").style.transform = "scale(" + Math.min((window.innerWidth / dimensions[0]), (window.innerHeight / dimensions[1])) + ")";
     document.getElementById("game").style.top = (((((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2) * dimensions[1]) / 2) + "px";
 });
-
