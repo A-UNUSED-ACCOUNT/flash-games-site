@@ -48,8 +48,9 @@ xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         swfInfo = JSON.parse(this.responseText);
-        if (typeof swfInfo[name] != "undefined" && typeof swfInfo[name]["Dimensions"] == "string" && swfInfo[name]["Dimensions"].toLowerCase() != "unknown" && swfInfo[name]["Dimensions"].toLowerCase() != "") {
-            dimensions = swfInfo[name]["Dimensions"].toLowerCase().split("x");
+        tmp = name.replace(/ /g, "-");
+        if (typeof swfInfo[tmp] != "undefined" && typeof swfInfo[tmp]["Dimensions"] == "string" && swfInfo[tmp]["Dimensions"].toLowerCase() != "unknown" && swfInfo[tmp]["Dimensions"].toLowerCase() != "") {
+            dimensions = swfInfo[tmp]["Dimensions"].toLowerCase().split("x");
         }
         element = document.createElement("embed");
         element.src = (baseURL + name.replace(/ /g, "-"));
