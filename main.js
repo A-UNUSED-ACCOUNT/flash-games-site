@@ -5,7 +5,7 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
     list = document.getElementById("list"),
     /*A regexp to filter out .git files*/
     allowedFiles = /\.swf/,
-   
+
     xhttp,
 
     element,
@@ -58,7 +58,8 @@ function getSize(swf) {
                 break;
         }
     }
-    dimensions = [((mWidth > 10) ? 1280 : mWidth), ((mHeight > 10) ? 1024 : mHeight)];
+    dimensions[0] = (mWidth > 10) ? 1280 : mWidth;
+    dimensions[1] = (mHeight > 10) ? 1024 : mHeight;
 }
 
 if (localStorage.getItem("token") != "flash") {
