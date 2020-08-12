@@ -18,7 +18,7 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
 
     tmp;
 
-
+alert("Loading...");
 
 if (localStorage.getItem("token") != "flash") {
     localStorage.setItem("token", "flash");
@@ -113,6 +113,7 @@ xhttp.onload = function () {
             document.body.appendChild(element);
         }
     }
+    alert("loaded!");
 };
 
 xhttp.open("GET", baseURL + name.replace(/ /g, "-"), true);
