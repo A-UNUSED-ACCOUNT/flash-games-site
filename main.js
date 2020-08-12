@@ -32,10 +32,10 @@ if (localStorage.getItem("token") != "flash") {
 function getSize() {
     var mWidth = 0,
         mHeight = 0,
+        currentOffset = 0x8,
         cByte = swf[currentOffset++],
         NbBits = cByte >> 3,
         currentBit = 2,
-        currentOffset = 0x8,
         currentValue;
     cByte &= 7;
     cByte <<= 5;
