@@ -29,9 +29,9 @@ if (localStorage.getItem("token") != "flash") {
     name = localStorage.getItem("game");
 }
 
-function getSize(swf) {
-    var mWidth,
-        mHeight,
+function getSize() {
+    var mWidth = 0,
+        mHeight = 0,
         cByte = swf[currentOffset++],
         NbBits = cByte >> 3,
         currentBit = 2,
@@ -97,7 +97,8 @@ xhttp.send();
 xhttp = new XMLHttpRequest();
 xhttp.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
-        getSize(new Uint8Array(xhttp.response));
+        swf = new Uint8Array(xhttp.response);
+        getSize();
         element = document.createElement("embed");
         element.src = (baseURL + name.replace(/ /g, "-"));
         element.width = dimensions[0] + "px";
