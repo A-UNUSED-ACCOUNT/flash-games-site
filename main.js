@@ -10,7 +10,7 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
 
     element,
 
-    dimensions = [1280, 1024],
+    dimensions = [0, 0],
 
     name,
 
@@ -101,7 +101,6 @@ xhttp.onreadystatechange = function () {
         element.style.transform = "scale(" + Math.min((window.innerWidth / dimensions[0]), (window.innerHeight / dimensions[1])) + ")";
         element.style.top = (((((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2) * dimensions[1]) / 2) + "px";
         element.style.position = "relative";
-
         document.getElementById("gameContainer").appendChild(element);
         if (localStorage.getItem("useRuffle") == "true") {
             element = document.createElement("script");
