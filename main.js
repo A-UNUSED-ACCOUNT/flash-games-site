@@ -5,9 +5,7 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
     list = document.getElementById("list"),
     /*A regexp to filter out .git files*/
     allowedFiles = /\.swf/,
-    /*A object containing all the swf files info, generated from info.json*/
-    swfInfo = {},
-
+   
     xhttp,
 
     element,
@@ -18,6 +16,51 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
 
     tmp;
 
+function getSize(swf) {
+    var mWidth,
+        mHeight,
+        cByte = swf[currentOffset++],
+        NbBits = cByte >> 3,
+        currentBit = 2,
+        currentOffset = 0x8,
+        currentValue;
+    cByte &= 7;
+    cByte <<= 5;
+    for (var numField = 0; numField < 4; numField++) {
+        currentValue = 0;
+        var bitcount = 0;
+        while (bitcount < NbBits) {
+            if ((cByte & 128) == 128) {
+                currentValue = currentValue + (1 << (NbBits - bitcount - 1));
+            }
+            cByte <<= 1;
+            cByte &= 255;
+            currentBit--;
+            bitcount++;
+            if (currentBit < 0) {
+                cByte = swf[currentOffset++];
+                currentBit = 7;
+            }
+        }
+        currentValue /= 20;
+        switch (numField) {
+            case 0:
+                mWidth = currentValue;
+                break;
+            case 1:
+                mWidth = currentValue - mWidth;
+                break;
+            case 2:
+                mHeight = currentValue;
+                break;
+            case 3:
+                mHeight = currentValue - mHeight;
+                break;
+        }
+    }
+    dimensions = [((mWidth > 10) ? 1280 : mWidth), ((mHeight > 10) ? 1024 : mHeight)];
+}
+
 if (localStorage.getItem("token") != "flash") {
     localStorage.setItem("token", "flash");
     localStorage.setItem("game", "");
@@ -26,6 +69,7 @@ if (localStorage.getItem("token") != "flash") {
 } else {
     name = localStorage.getItem("game");
 }
+
 
 xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
@@ -47,11 +91,7 @@ xhttp.send();
 xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-        swfInfo = JSON.parse(this.responseText);
-        tmp = name.replace(/ /g, "-");
-        if (typeof swfInfo[tmp] != "undefined" && typeof swfInfo[tmp]["Dimensions"] == "string" && swfInfo[tmp]["Dimensions"].toLowerCase() != "unknown" && swfInfo[tmp]["Dimensions"].toLowerCase() != "") {
-            dimensions = swfInfo[tmp]["Dimensions"].toLowerCase().split("x");
-        }
+        getSize(new Uint8Array(xhttp.response));
         element = document.createElement("embed");
         element.src = (baseURL + name.replace(/ /g, "-"));
         element.width = dimensions[0] + "px";
@@ -69,17 +109,21 @@ xhttp.onreadystatechange = function () {
         }
     }
 };
-xhttp.open("GET", baseURL + "info.json", true);
+
+xhttp.open("GET", baseURL + name.replace(/ /g, "-"), true);
+xhttp.responseType = "arraybuffer";
 xhttp.send();
 
 list.addEventListener("change", function () {
     localStorage.setItem("game", list.value.replace("/ /g", "-") + ".swf");
     location.reload();
 });
+
 ruffleToggleButton.addEventListener("click", function () {
     localStorage.setItem("useRuffle", localStorage.getItem("useRuffle") != "true");
     location.reload();
 });
+
 window.addEventListener("resize", function () {
     document.getElementById("game").style.transform = "scale(" + Math.min((window.innerWidth / dimensions[0]), (window.innerHeight / dimensions[1])) + ")";
     document.getElementById("game").style.top = (((((window.innerWidth / dimensions[0]) + (window.innerHeight / dimensions[1])) / 2) * dimensions[1]) / 2) + "px";
