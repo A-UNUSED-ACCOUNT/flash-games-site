@@ -14,6 +14,8 @@ var baseURL = "https://raw.githack.com/tsukisuperior/flash-games/master/",
 
     name,
 
+    swf,
+
     tmp;
 
 function getSize(swf) {
@@ -90,7 +92,7 @@ xhttp.open("GET", "https://api.github.com/repos/tsukisuperior/flash-games/conten
 xhttp.send();
 
 xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function () {
+xhttp.onload = function () {
     if (this.readyState == 4 && this.status == 200) {
         getSize(new Uint8Array(xhttp.response));
         element = document.createElement("embed");
